@@ -1,7 +1,7 @@
 
 @extends('layout')
 @section('content')
-    <h1>next bai 7</h1>
+    <h1>next bai 9</h1>
 
 <div class="features_items"><!--features_items-->
     <h2 class="title text-center">Features Items</h2>
