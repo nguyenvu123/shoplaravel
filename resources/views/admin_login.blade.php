@@ -30,9 +30,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="log-w3">
     <div class="w3layouts-main">
         <h2>Sign In Now</h2>
-        <form action="#" method="post">
-            <input type="email" class="ggg" name="Email" placeholder="E-MAIL" required="">
-            <input type="password" class="ggg" name="Password" placeholder="PASSWORD" required="">
+        <?php
+        $mg = Session::get('message');
+        if($mg){
+            echo "$mg";
+            Session::put('message',null);
+        }
+
+
+        ?>
+
+
+
+        <form action="{{URL::to('/admin-dashboard')}}" method="post">
+            {{ csrf_field() }}
+            <input type="email" class="ggg" name="admin_email" placeholder="E-MAIL" required="">
+            <input type="password" class="ggg" name="admin_password" placeholder="PASSWORD" required="">
             <span><input type="checkbox" />Remember Me</span>
             <h6><a href="#">Forgot Password?</a></h6>
             <div class="clearfix"></div>
