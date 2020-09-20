@@ -12,60 +12,114 @@ session_start();
 
 class ProductController extends Controller
 {
+
+    public function Authlogin() {
+
+        $admin_id = Session::get('admin_id');
+        echo $admin_id;
+        if($admin_id) {
+            return Redirect::to('dashboard');
+        }else {
+            return Redirect::to('admin')->send();
+        }
+
+    }
+
+
     public function add_product()
     {
+        $this->Authlogin();
+        $cates = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
+        $brands = DB::table('tbl_brand_product')->orderby('brand_id','desc')->get();
 
-        return view('admin.addProduct');
+        return view('admin.addProduct',
+            [
+                'cates' =>$cates,
+                'brands' =>$brands
+            ]
+        );
     }
 
-    public function all_brand_product()
+    public function all_product()
     {
-        $all_brand_products =  DB::table('tbl_brand_product')->get();
+        $this->Authlogin();
+        $all_products =  DB::table('tbl__product')
+            ->join('tbl_category_product', 'tbl_category_product.category_id', '=', 'tbl__product.category_id')
+            ->join('tbl_brand_product', 'tbl_brand_product.brand_id', '=', 'tbl__product.brand_id')->orderby('tbl__product.product_id','desc')->get();
 
-        return view('admin.allBrand',['all_brand_products'=>$all_brand_products]);
+        return view('admin.allProduct',['all_products'=>$all_products]);
     }
 
 
 
-    public function save_brand_product(Request $request) {
+    public function save_product(Request $request) {
+        $this->Authlogin();
         $data = array();
-        $data ['brand_name'] = $request->brand_product_name;
-        $data ['brand_des'] = $request->brand_product_desc;
-        $data ['brand_status'] = $request->brand_product_status;
-        DB::table('tbl_brand_product')->insert($data);
-        Session::put('messge','Thêm thuognw hiệu thành công!!');
-        return Redirect::to('add-brand-product');
+        $data ['product_name'] = $request->product_name;
+        $data ['product_price'] = $request->product_price;
+        $data ['product_des'] = $request->product_des;
+        $data ['product_content'] = $request->product_content;
+        $data ['category_id'] = $request->category_product;
+        $data ['brand_id'] = $request->brand_product;
+        $data ['product_status'] = $request->product_status;
+        $get_img = $request->file('product_img');
+        $get_name_img =$get_img->getClientOriginalName();
+        $new_name = current(explode('.',$get_name_img));
+        echo $new_name;
+        if($get_img){
+            $new_img = $new_name.time().'.'.$get_img->getClientOriginalExtension();
+            $get_img->move('public/upload/products', $new_img);
+            $data['product_img'] = $new_img;
+
+            DB::table('tbl__product')->insert($data);
+            Session::put('messge','Thêm san pham thành công!!');
+            return Redirect::to('add-product');
+        }
+        $data['product_img'] = '';
+
+        DB::table('tbl__product')->insert($data);
+        Session::put('messge','Thêm san pham thành công!!');
+        return Redirect::to('add-product');
 
     }
 
-    public function active_brand($id) {
-        DB::table('tbl_brand_product')
-            ->where('brand_id', $id)
-            ->update(['brand_status' => 1]);
+    public function active_product($id) {
+        $this->Authlogin();
+        DB::table('tbl__product')
+            ->where('product_id', $id)
+            ->update(['product_status' => 1]);
 
-        $all_brand_products =  DB::table('tbl_brand_product')->get();
+        $all_products =  DB::table('tbl__product')
+            ->join('tbl_category_product', 'tbl_category_product.category_id', '=', 'tbl__product.category_id')
+            ->join('tbl_brand_product', 'tbl_brand_product.brand_id', '=', 'tbl__product.brand_id')->orderby('tbl__product.product_id','desc')->get();
 
-        return view('admin.allBrand',['all_brand_products'=>$all_brand_products]);
-
-    }
-
-    public function unactive_brand($id) {
-        DB::table('tbl_brand_product')
-            ->where('brand_id', $id)
-            ->update(['brand_status' => 0]);
-
-        $all_brand_products =  DB::table('tbl_brand_product')->get();
-
-        return view('admin.allBrand',['all_brand_products'=>$all_brand_products]);
+        return view('admin.allProduct',['all_products'=>$all_products]);
 
     }
 
-    public function  delete_brand($id) {
-        DB::table('tbl_brand_product')
-            ->where('brand_id', $id)
+    public function unactive_product($id) {
+        $this->Authlogin();
+        DB::table('tbl__product')
+            ->where('product_id', $id)
+            ->update(['product_status' => 0]);
+
+        $all_products =  DB::table('tbl__product')
+            ->join('tbl_category_product', 'tbl_category_product.category_id', '=', 'tbl__product.category_id')
+            ->join('tbl_brand_product', 'tbl_brand_product.brand_id', '=', 'tbl__product.brand_id')->orderby('tbl__product.product_id','desc')->get();
+
+        return view('admin.allProduct',['all_products'=>$all_products]);
+
+    }
+
+    public function  delete_product($id) {
+        $this->Authlogin();
+        DB::table('tbl__product')
+            ->where('product_id', $id)
             ->delete();
-        $all_brand_products =  DB::table('tbl_brand_product')->get();
+        $all_products =  DB::table('tbl__product')
+            ->join('tbl_category_product', 'tbl_category_product.category_id', '=', 'tbl__product.category_id')
+            ->join('tbl_brand_product', 'tbl_brand_product.brand_id', '=', 'tbl__product.brand_id')->orderby('tbl__product.product_id','desc')->get();
 
-        return view('admin.allBrand',['all_brand_products'=>$all_brand_products]);
+        return view('admin.allProduct',['all_products'=>$all_products]);
     }
 }
