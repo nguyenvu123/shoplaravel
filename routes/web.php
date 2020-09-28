@@ -47,3 +47,17 @@ Route::get('/active_product/{id}', 'App\Http\Controllers\ProductController@activ
 Route::get('/unactive_product/{id}', 'App\Http\Controllers\ProductController@unactive_product');
 Route::get('/delete_product/{id}', 'App\Http\Controllers\ProductController@delete_product');
 
+//home page
+
+Route::get('/category-filter-product/{id}', 'App\Http\Controllers\CategoryPoducts@fiter_category');
+
+
+//detail product
+Route::get('/product-detail/{id}', 'App\Http\Controllers\ProductController@detailProduct');
+Route::post('/save-cart', 'App\Http\Controllers\CartController@save_cart');
+Route::get('/show-cart', 'App\Http\Controllers\CartController@showCart');
+Route::get('/deleteProduct/{id}', 'App\Http\Controllers\CartController@deleteProduct');
+
+
+
+

@@ -17,15 +17,15 @@
     <script src="{{asset('public/fontend/js/html5shiv.js')}}"></script>
     <script src="{{asset('public/fontend/js/respond.min.js')}}"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="{{('public/fontend/images/ico/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{URL::to('public/fontend/images/ico/favicon.ico')}}">
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
-          href="{{('public/fontend/images/ico/apple-touch-icon-144-precomposed.png')}}">
+          href="{{URL::to('public/fontend/images/ico/apple-touch-icon-144-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" sizes="114x114"
-          href="{{('public/fontend/images/ico/apple-touch-icon-114-precomposed.png')}}">
+          href="{{URL::to('public/fontend/images/ico/apple-touch-icon-114-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" sizes="72x72"
-          href="{{('public/fontend/images/ico/apple-touch-icon-72-precomposed.png')}}">
+          href="{{URL::to('public/fontend/images/ico/apple-touch-icon-72-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed"
-          href="{{('public/fontend/images/ico/apple-touch-icon-57-precomposed.png')}}">
+          href="{{URL::to('public/fontend/images/ico/apple-touch-icon-57-precomposed.png')}}">
 </head><!--/head-->
 
 <body>
@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="{{('public/fontend/images/home/logo.png')}}" alt=""/></a>
+                        <a href="index.html"><img src="{{URL::to('public/fontend/images/home/logo.png')}}" alt=""/></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">
@@ -117,7 +117,7 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="index.html" class="active">Trang chủ</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="shop.html">Products</a></li>
@@ -169,9 +169,9 @@
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="{{('public/fontend/images/home/girl1.jpg')}}" class="girl img-responsive"
+                                <img src="{{URL::to('public/fontend/images/home/girl1.jpg')}}" class="girl img-responsive"
                                      alt=""/>
-                                <img src="{{('public/fontend/images/home/pricing.png')}}" class="pricing" alt=""/>
+                                <img src="{{URL::to('public/fontend/images/home/pricing.png')}}" class="pricing" alt=""/>
                             </div>
                         </div>
                         <div class="item">
@@ -183,9 +183,9 @@
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="{{('public/fontend/images/home/girl2.jpg')}}" class="girl img-responsive"
+                                <img src="{{URL::to('public/fontend/images/home/girl2.jpg')}}" class="girl img-responsive"
                                      alt=""/>
-                                <img src="{{('public/fontend/images/home/pricing.png')}}" class="pricing" alt=""/>
+                                <img src="{{URL::to('public/fontend/images/home/pricing.png')}}" class="pricing" alt=""/>
                             </div>
                         </div>
 
@@ -198,9 +198,9 @@
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="{{('public/fontend/images/home/girl3.jpg')}}" class="girl img-responsive"
+                                <img src="{{URL::to('public/fontend/images/home/girl3.jpg')}}" class="girl img-responsive"
                                      alt=""/>
-                                <img src="{{('public/fontend/images/home/pricing.png')}}" class="pricing" alt=""/>
+                                <img src="{{URL::to('public/fontend/images/home/pricing.png')}}" class="pricing" alt=""/>
                             </div>
                         </div>
 
@@ -224,125 +224,27 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>Category</h2>
+                    <h2>Danh mục sản phẩm</h2>
                     <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+
+                        <?php foreach ($categorys as $category): ?>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        Sportswear
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="sportswear" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="#">Nike </a></li>
-                                        <li><a href="#">Under Armour </a></li>
-                                        <li><a href="#">Adidas </a></li>
-                                        <li><a href="#">Puma</a></li>
-                                        <li><a href="#">ASICS </a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#mens">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        Mens
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="mens" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="#">Fendi</a></li>
-                                        <li><a href="#">Guess</a></li>
-                                        <li><a href="#">Valentino</a></li>
-                                        <li><a href="#">Dior</a></li>
-                                        <li><a href="#">Versace</a></li>
-                                        <li><a href="#">Armani</a></li>
-                                        <li><a href="#">Prada</a></li>
-                                        <li><a href="#">Dolce and Gabbana</a></li>
-                                        <li><a href="#">Chanel</a></li>
-                                        <li><a href="#">Gucci</a></li>
-                                    </ul>
-                                </div>
+                                <h4 class="panel-title"><a href="{{URL::to('/category-filter-product/'.$category->category_id)}}">{{$category->category_name}}</a></h4>
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#womens">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        Womens
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="womens" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="#">Fendi</a></li>
-                                        <li><a href="#">Guess</a></li>
-                                        <li><a href="#">Valentino</a></li>
-                                        <li><a href="#">Dior</a></li>
-                                        <li><a href="#">Versace</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Kids</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Fashion</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Households</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Interiors</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Clothing</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Bags</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Shoes</a></h4>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
+
                     </div><!--/category-products-->
 
                     <div class="brands_products"><!--brands_products-->
-                        <h2>Brands</h2>
+                        <h2>Thương hiệu sản phẩm</h2>
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#"> <span class="pull-right">(50)</span>Acne</a></li>
-                                <li><a href="#"> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-                                <li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>
-                                <li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>
-                                <li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
-                                <li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                                <li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+                                <?php foreach ($brands as $brand): ?>
+                                <li><a href=''> <span class="pull-right">(50)</span>{{$brand->brand_name}}</a></li>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
                     </div><!--/brands_products-->
@@ -357,7 +259,7 @@
                     </div><!--/price-range-->
 
                     <div class="shipping text-center"><!--shipping-->
-                        <img src="{{('public/fontend/images/home/shipping.jpg')}}" alt=""/>
+                        <img src="{{URL::to('public/fontend/images/home/shipping.jpg')}}" alt=""/>
                     </div><!--/shipping-->
 
                 </div>
@@ -385,7 +287,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="{{('public/fontend/images/home/iframe1.png')}}" alt=""/>
+                                    <img src="{{URL::to('public/fontend/images/home/iframe1.png')}}" alt=""/>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -400,7 +302,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="{{('public/fontend/images/home/iframe2.png')}}" alt=""/>
+                                    <img src="{{URL::to('public/fontend/images/home/iframe2.png')}}" alt=""/>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -415,7 +317,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="{{('public/fontend/images/home/iframe3.png')}}" alt=""/>
+                                    <img src="{{URL::to('public/fontend/images/home/iframe3.png')}}" alt=""/>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -430,7 +332,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="{{('public/fontend/images/home/iframe4.png')}}" alt=""/>
+                                    <img src="{{URL::to('public/fontend/images/home/iframe4.png')}}" alt=""/>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -443,7 +345,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="address">
-                        <img src="{{('public/fontend/images/home/map.png')}}" alt=""/>
+                        <img src="{{URL::to('public/fontend/images/home/map.png')}}" alt=""/>
                         <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
                     </div>
                 </div>

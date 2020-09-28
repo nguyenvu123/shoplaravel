@@ -83,4 +83,22 @@ class CategoryPoducts extends Controller
 
         return view('admin.allCategory',['all_category_products'=>$all_category_products]);
     }
+
+    //Font end page home
+    public function fiter_category($id) {
+
+
+
+        $categorys = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
+        $brands = DB::table('tbl_brand_product')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
+        $product_of_cate = DB::table('tbl__product')->where('category_id',$id)->orderby('product_id','desc')->limit(8)->get();
+
+        return view('pages.showCategory', [
+            'categorys' => $categorys,
+            'brands' => $brands,
+            'products_new' =>$product_of_cate
+        ]);
+    }
+
+
 }
