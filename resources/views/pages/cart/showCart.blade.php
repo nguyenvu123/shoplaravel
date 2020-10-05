@@ -124,7 +124,7 @@ foreach ($items as $item) {
                         </li>
                     </ul>
                     <a class="btn btn-default update" href="">Get Quotes</a>
-                    <a class="btn btn-default check_out" href="">Continue</a>
+                    <a class="btn btn-default check_out" href="#">Continue</a>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -136,7 +136,7 @@ foreach ($items as $item) {
                         <li>Total <span>$61</span></li>
                     </ul>
                     <a class="btn btn-default update" href="">Update</a>
-                    <a class="btn btn-default check_out" href="">Check Out</a>
+                    <a class="btn btn-default check_out" href="{{URL::to('/login-checkout')}}">Check Out</a>
                 </div>
             </div>
         </div>

@@ -57,6 +57,14 @@ Route::get('/product-detail/{id}', 'App\Http\Controllers\ProductController@detai
 Route::post('/save-cart', 'App\Http\Controllers\CartController@save_cart');
 Route::get('/show-cart', 'App\Http\Controllers\CartController@showCart');
 Route::get('/deleteProduct/{id}', 'App\Http\Controllers\CartController@deleteProduct');
+Route::get('/login-checkout', 'App\Http\Controllers\CheckoutController@loginCheckout');
+Route::post('/add-customer', 'App\Http\Controllers\CheckoutController@addCustomer');
+Route::get('/checkout', 'App\Http\Controllers\CheckoutController@checkout');
+Route::post('/save-checkout-customer', 'App\Http\Controllers\CheckoutController@saveShipping');
+Route::get('/logout', 'App\Http\Controllers\CheckoutController@logout');
+Route::post('/login', 'App\Http\Controllers\CheckoutController@login');
+
+
 
 
 
