@@ -118,5 +118,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Eshopper" />
+    <orderEntry type="module" module-name="silex" />
   </component>
 </module>

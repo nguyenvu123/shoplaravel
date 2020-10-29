@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use DB;
 use Session;
+use Cart;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 
@@ -61,7 +62,7 @@ class CheckoutController extends Controller
         $shipping_id = DB::table('tbl_shipping')->insertGetId($data);
         Session::put('shipping_id',$shipping_id);
         Session::put('shipping_name',$request->name);
-        return Redirect('/checkout');
+        return Redirect('/payment');
     }
     public function login(Request $request) {
         $email = $request->email;
@@ -85,4 +86,61 @@ class CheckoutController extends Controller
         return Redirect('/login-checkout');
     }
 
+    public function payment() {
+
+        $categorys = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
+        $brands = DB::table('tbl_brand_product')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
+        return view('pages.checkout.payment',[
+
+            'categorys' => $categorys,
+            'brands' => $brands
+
+        ]);
+
+    }
+
+    public function orderPlace(Request $request) {
+
+        $content = Cart::content();
+        $data = array();
+        $data['payment_method'] =  $request->payment_option;
+        $data['payment_status'] =  'Đang chờ sử lý';
+        $payment_id = DB::table('tbl_payment')->insertGetId($data);
+
+
+        //install order
+        $orderData = array();
+        $orderData['custom_id'] =  Session::get('customer_id');
+        $orderData['shipping_id'] =  Session::get('shipping_id');
+        $orderData['payment_id'] =  $payment_id;
+        $orderData['order_status'] = 'Đang chờ sử lý';
+        $orderData['order_total'] = Cart::total();
+        $order_id = DB::table('tbl_order')->insertGetId($orderData);
+
+     //orderdetail
+
+        $orderD = array();
+        foreach ( $content as $value) {
+            $orderD['order_id'] =  $order_id;
+            $orderD['product_id'] =  $value->id;
+            $orderD['product_name'] =  $value->name;
+            $orderD['product_price'] =  $value->price;
+            $orderD['product_sales_quantity'] =  $value->qty;
+             DB::table('tbl_order_details')->insert($orderD);
+        }
+        if($data['payment_method'] ==1) {
+            echo "1";
+        }else {
+            $categorys = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
+            $brands = DB::table('tbl_brand_product')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
+            Cart::destroy();
+            return view('pages.checkout.handcash',[
+
+                'categorys' => $categorys,
+                'brands' => $brands
+
+            ]);
+        }
+
+    }
 }

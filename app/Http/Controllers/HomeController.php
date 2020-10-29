@@ -25,4 +25,18 @@ class HomeController extends Controller
             'products_new' =>$products_new
         ]);
     }
+    public function search( Request $request){
+        $categorys = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
+        $brands = DB::table('tbl_brand_product')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
+        $keySearch = $request->keySearch;
+        $searchProducts = DB::table('tbl__product')->where('product_name', 'like', '%'.$keySearch.'%')->orderby('brand_id', 'desc')->get();
+
+
+        return view('pages.search', [
+            'categorys' => $categorys,
+            'brands' => $brands,
+            'products_new' =>$searchProducts,
+            'key' =>$keySearch,
+        ]);
+    }
 }

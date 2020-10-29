@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 //Fontend
 Route::get('/', 'App\Http\Controllers\HomeController@index');
+Route::post('/search', 'App\Http\Controllers\HomeController@search');
+
 
 
 //Admin
@@ -60,6 +62,11 @@ Route::get('/deleteProduct/{id}', 'App\Http\Controllers\CartController@deletePro
 Route::get('/login-checkout', 'App\Http\Controllers\CheckoutController@loginCheckout');
 Route::post('/add-customer', 'App\Http\Controllers\CheckoutController@addCustomer');
 Route::get('/checkout', 'App\Http\Controllers\CheckoutController@checkout');
+Route::get('/payment', 'App\Http\Controllers\CheckoutController@payment');
+Route::post('/order_place', 'App\Http\Controllers\CheckoutController@orderPlace');
+
+
+
 Route::post('/save-checkout-customer', 'App\Http\Controllers\CheckoutController@saveShipping');
 Route::get('/logout', 'App\Http\Controllers\CheckoutController@logout');
 Route::post('/login', 'App\Http\Controllers\CheckoutController@login');

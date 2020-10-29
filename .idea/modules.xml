@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../Eshopper/.idea/Eshopper.iml" filepath="$PROJECT_DIR$/../Eshopper/.idea/Eshopper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/shoplaravel.iml" filepath="$PROJECT_DIR$/.idea/shoplaravel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../silex/.idea/silex.iml" filepath="$PROJECT_DIR$/../silex/.idea/silex.iml" />
     </modules>
   </component>
 </project>

@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="D:/site" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../silex" vcs="Git" />
   </component>
 </project>

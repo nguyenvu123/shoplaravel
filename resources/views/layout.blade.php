@@ -160,7 +160,12 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="Search"/>
+                        <form action="{{URL::to('/search')}}" method="post">
+                            {{csrf_field()}}
+                            <input type="text" name="keySearch" placeholder="Search" value=""/>
+                            <input type="submit" name="search" value="tim kiem">
+                        </form>
+
                     </div>
                 </div>
             </div>
