@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Brand;
 use DB;
 use Session;
 use App\Http\Requests;
@@ -24,7 +24,6 @@ class BrandProduct extends Controller
 
     }
 
-
     public function add_brand_product()
     {
         $this->Authlogin();
@@ -34,20 +33,19 @@ class BrandProduct extends Controller
 
     public function all_brand_product()
     {
-        $all_brand_products =  DB::table('tbl_brand_product')->get();
-
+        $all_brand_products = Brand::orderBy('brand_id', 'DESC')->get();
         return view('admin.allBrand',['all_brand_products'=>$all_brand_products]);
     }
 
-
-
     public function save_brand_product(Request $request) {
         $this->Authlogin();
-        $data = array();
-        $data ['brand_name'] = $request->brand_product_name;
-        $data ['brand_des'] = $request->brand_product_desc;
-        $data ['brand_status'] = $request->brand_product_status;
-        DB::table('tbl_brand_product')->insert($data);
+
+        $data = $request->all();
+        $brand = new Brand();
+        $brand->brand_name = $data['brand_product_name'];
+        $brand->brand_des = $data['brand_product_desc'];
+        $brand->brand_status = $data['brand_product_status'];
+        $brand->save();
         Session::put('messge','Thêm thuognw hiệu thành công!!');
         return Redirect::to('add-brand-product');
 
@@ -55,35 +53,26 @@ class BrandProduct extends Controller
 
     public function active_brand($id) {
         $this->Authlogin();
-        DB::table('tbl_brand_product')
-            ->where('brand_id', $id)
-            ->update(['brand_status' => 1]);
-
+        $brand = Brand::find($id);
+        $brand->brand_status = 1;
+        $brand->save();
         $all_brand_products =  DB::table('tbl_brand_product')->get();
-
         return view('admin.allBrand',['all_brand_products'=>$all_brand_products]);
-
     }
 
     public function unactive_brand($id) {
         $this->Authlogin();
-        DB::table('tbl_brand_product')
-            ->where('brand_id', $id)
-            ->update(['brand_status' => 0]);
-
-        $all_brand_products =  DB::table('tbl_brand_product')->get();
-
+        $brand = Brand::find($id);
+        $brand->brand_status = 0;
+        $brand->save();
+        $all_brand_products = Brand::orderBy('brand_id', 'DESC')->get();
         return view('admin.allBrand',['all_brand_products'=>$all_brand_products]);
-
     }
 
     public function  delete_brand($id) {
         $this->Authlogin();
-        DB::table('tbl_brand_product')
-            ->where('brand_id', $id)
-            ->delete();
-        $all_brand_products =  DB::table('tbl_brand_product')->get();
-
+         Brand::destroy($id);
+        $all_brand_products =  Brand::orderBy('brand_id', 'DESC')->get();
         return view('admin.allBrand',['all_brand_products'=>$all_brand_products]);
     }
 }

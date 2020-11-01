@@ -128,6 +128,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                         </ul>
                     </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Đơn hàng</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('/manage_order')}}">Quản lý đơn hàng</a></li>
+
+
+                        </ul>
+                    </li>
                     <li>
                         <a href="fontawesome.html">
                             <i class="fa fa-bullhorn"></i>
@@ -226,15 +238,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--main content end-->
 </section>
 <script src="{{asset('public/backend/js/bootstrap.js')}}"></script>
+<script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
 <script src="{{asset('public/backend/js/scripts.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{asset('public/backend/js/flot-chart/excanvas.min.js')}}"></script><![endif]-->
 <script src="{{asset('public/backend/js/jquery.scrollTo.js')}}"></script>
+
+
 <!-- morris JavaScript -->
+{{--<script>--}}
+    {{--CKEDITOR.replace('ckeditor');--}}
+    {{--CKEDITOR.replace('ckeditor1');--}}
+{{--</script>--}}
 <script>
     $(document).ready(function() {
+        CKEDITOR.replace('ckeditor');
+        CKEDITOR.replace('ckeditor1');
+
         //BOX BUTTON SHOW AND CLOSE
         jQuery('.small-graph-box').hover(function() {
             jQuery(this).find('.box-button').fadeIn('fast');

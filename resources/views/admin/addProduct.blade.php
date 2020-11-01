@@ -38,7 +38,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Mô tả sản phẩm</label>
-                                <textarea name="product_des"  class="form-control" id="exampleInputPassword1"
+                                <textarea id="ckeditor1" name="product_des"  class="form-control" id="exampleInputPassword1"
                                           placeholder="Mô tả danh mục sản phẩm"> </textarea>
                             </div>
                             <div class="form-group">

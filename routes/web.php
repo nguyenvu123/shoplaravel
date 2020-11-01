@@ -72,6 +72,10 @@ Route::get('/logout', 'App\Http\Controllers\CheckoutController@logout');
 Route::post('/login', 'App\Http\Controllers\CheckoutController@login');
 
 
+////
+
+Route::get('/manage_order', 'App\Http\Controllers\CheckoutController@manage_order');
+Route::get('/detail_order/{id}', 'App\Http\Controllers\CheckoutController@detailOrder');
 
 
 

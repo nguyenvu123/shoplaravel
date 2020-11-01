@@ -12,6 +12,20 @@ use Illuminate\Support\Facades\Redirect;
 
 class CheckoutController extends Controller
 {
+
+    public function Authlogin() {
+
+        $admin_id = Session::get('admin_id');
+        echo $admin_id;
+        if($admin_id) {
+            return Redirect::to('dashboard');
+        }else {
+            return Redirect::to('admin')->send();
+        }
+
+    }
+
+
     public function showCheckout(){
         return view('pages.checkout.showCheckout');
     }
@@ -142,5 +156,30 @@ class CheckoutController extends Controller
             ]);
         }
 
+    }
+
+    public function manage_order() {
+        $this->Authlogin();
+        $all_order =  DB::table('tbl_order')
+            ->join('tbl_customer','tbl_customer.customer_id', '=', 'tbl_order.custom_id')
+           ->select('tbl_order.*','tbl_customer.customer_name')
+            ->orderby('tbl_order.order_id','desc')->get();
+
+
+        return view('admin.manage_order',[
+            'all_orders' =>$all_order
+        ]);
+    }
+
+    public function detailOrder($id) {
+        $this->Authlogin();
+        $all_order_detail =  DB::table('tbl_order_details')
+            ->where('tbl_order_details.order_id', $id)
+            ->orderby('order_id', 'desc')->get();
+
+
+        return view('admin.detail_order',[
+            'all_order_detail' =>$all_order_detail
+        ]);
     }
 }
