@@ -86,9 +86,6 @@ class CategoryPoducts extends Controller
 
     //Font end page home
     public function fiter_category($id) {
-
-
-
         $categorys = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
         $brands = DB::table('tbl_brand_product')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
         $product_of_cate = DB::table('tbl__product')->where('category_id',$id)->orderby('product_id','desc')->limit(8)->get();
@@ -99,6 +96,5 @@ class CategoryPoducts extends Controller
             'products_new' =>$product_of_cate
         ]);
     }
-
 
 }

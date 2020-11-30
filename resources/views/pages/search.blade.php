@@ -1,6 +1,5 @@
 @extends('layout')
 @section('content')
-    <h1>next bai 11</h1>
     <div class="features_items"><!--features_items-->
         <h2 class="title text-center">Sản phẩm mới nhất </h2>
 

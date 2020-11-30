@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home | E-Shopper</title>
     <link href="{{asset('public/fontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/fontend/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -12,6 +13,7 @@
     <link href="{{asset('public/fontend/css/price-range.css')}}" rel="stylesheet">
     <link href="{{asset('public/fontend/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('public/fontend/css/main.css')}}" rel="stylesheet">
+    <link href="{{asset('public/fontend/css/customs.css')}}" rel="stylesheet">
     <link href="{{asset('public/fontend/css/responsive.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{asset('public/fontend/js/html5shiv.js')}}"></script>
@@ -61,31 +63,9 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="{{URL::to('public/fontend/images/home/logo.png')}}" alt=""/></a>
+                        <a href="/"><img src="{{URL::to('public/fontend/images/home/logo.png')}}" alt=""/></a>
                     </div>
-                    <div class="btn-group pull-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                USA
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Canada</a></li>
-                                <li><a href="#">UK</a></li>
-                            </ul>
-                        </div>
 
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                DOLLAR
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Canadian Dollar</a></li>
-                                <li><a href="#">Pound</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
@@ -93,10 +73,9 @@
                             <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="show-cart"><i class="fa fa-shopping-cart"></i>Cart (<span class="count-item-cart"> {{ Cart::count() }}</span>)</a></li>
                             <?php
                             $customer_name = Session::get('customer_name');
-
                             if($customer_name){ ?>
                             <li><a href="{{URL::to('/logout')}}">Logout
                             <?php
@@ -163,7 +142,6 @@
                         <form action="{{URL::to('/search')}}" method="post">
                             {{csrf_field()}}
                             <input type="text" name="keySearch" placeholder="Search" value=""/>
-                            <input type="submit" name="search" value="tim kiem">
                         </form>
 
                     </div>
@@ -267,8 +245,10 @@
                         <h2>Thương hiệu sản phẩm</h2>
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
+
                                 <?php foreach ($brands as $brand): ?>
-                                <li><a href=''> <span class="pull-right">(50)</span>{{$brand->brand_name}}</a></li>
+
+                                <li><a class="brand-ajax" href='javascript:void(0)' data-id ="{{$brand->brand_id}}"> <span class="pull-right"></span>{{$brand->brand_name}}</a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
@@ -464,5 +444,40 @@
 <script src="{{asset('public/fontend/js/price-range.js')}}"></script>
 <script src="{{asset('public/fontend/js/jquery.prettyPhoto.js')}}"></script>
 <script src="{{asset('public/fontend/js/main.js')}}"></script>
+
+<script>
+    $( document ).ready(function() {
+        $('.add-to-cart-ajax').click(function () {
+           var id = $(this).data('idproduct');
+          $.ajax({
+              method: 'POST',
+              url: '{{url('/add-product-ajax')}}',
+              data :{
+                  id : id,
+                  _token: '{{csrf_token()}}',
+              },
+              success: function (data) {
+                  $('.count-item-cart').html(data);
+              }
+          })
+        });
+
+        $('.brand-ajax').click(function () {
+           var id = $(this).data('id');
+
+            $.ajax({
+                method: 'GET',
+                url: '{{url('/brand-product-ajax-home')}}',
+                data :{
+                    id : id,
+                    _token: '{{csrf_token()}}',
+                },
+                success: function (data) {
+                   console.log(data);
+                }
+            })
+        });
+    });
+</script>
 </body>
 </html>

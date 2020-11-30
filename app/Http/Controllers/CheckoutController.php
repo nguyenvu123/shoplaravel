@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 use DB;
 use Session;
@@ -181,5 +182,25 @@ class CheckoutController extends Controller
         return view('admin.detail_order',[
             'all_order_detail' =>$all_order_detail
         ]);
+    }
+
+    public function addToCartAjax(Request $request) {
+       $data = $request->all();
+       $id = ($data['id']);
+       $productDetail = Product::find($id);
+       $data = array();
+        $data['id'] = $productDetail->product_id;
+        $data['qty'] = 1;
+        $data['name'] = $productDetail->product_name;
+        $data['price'] = $productDetail->product_price;
+        $data['option']['image'] = $productDetail->product_img;
+        $data['weight'] = '123';
+        Cart::add($data);
+        echo Cart::count();
+    }
+
+    public function showBrandAjax(Request $request) {
+        $data = $request->all();
+        $id = ($data['id']);
     }
 }

@@ -1,0 +1,22 @@
+.shop-menu.pull-right {
+    position: relative;
+}
+.shop-menu.pull-right .sub-cart {
+     position: absolute;
+     top: 43px;
+     max-width: 300px;
+     right: 0;
+    z-index: 9;
+    background: #f0f0e9;
+    width: 300px;
+ }
+.shop-menu.pull-right .sub-cart ul {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+.shop-menu.pull-right .sub-cart ul li {
+    padding-bottom: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid;
+}
